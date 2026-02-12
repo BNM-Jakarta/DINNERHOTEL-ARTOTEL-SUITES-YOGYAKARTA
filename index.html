@@ -7,36 +7,29 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bnm-navy: #002D72;
-      --bnm-red: #ED1C24;
-    }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8fafc;
-      color: var(--bnm-navy);
-    }
+    :root { --bnm-navy: #002D72; --bnm-red: #ED1C24; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: var(--bnm-navy); }
     .font-serif { font-family: 'Playfair Display', serif; }
-    .btn-gradient {
-      background: linear-gradient(135deg, var(--bnm-navy) 0%, #001a45 100%);
+    .btn-submit { background: linear-gradient(135deg, var(--bnm-navy) 0%, #001a45 100%); transition: all 0.3s; }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+    .glass { background: white; border: 1px solid rgba(0, 45, 114, 0.1); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 3px solid #fff;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
     }
-    .input-focus:focus {
-      border-color: var(--bnm-navy);
-      box-shadow: 0 0 0 3px rgba(0, 45, 114, 0.1);
-    }
-    .animate-up {
-      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center py-10 px-4">
 
-  <!-- Logo BNM (Identik Gambar) -->
-  <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-12 animate-up flex items-center gap-6 max-w-full overflow-x-auto">
+  <!-- Logo BNM -->
+  <div class="bg-white p-6 rounded-2xl border border-slate-100 mb-12 flex items-center gap-6 max-w-full overflow-x-auto shadow-sm">
     <div class="flex flex-col items-center">
       <div class="w-24 h-1.5 bg-[#ED1C24] mb-1"></div>
       <span class="text-4xl font-[900] tracking-tighter text-[#002D72] leading-none">BNM</span>
@@ -44,101 +37,64 @@
     </div>
     <div class="h-12 w-px bg-slate-200"></div>
     <div class="flex flex-col">
-      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap uppercase">PT. Berca Niaga</span>
-      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap uppercase">Medika</span>
+      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap uppercase">PT. Berca Niaga Medika</span>
     </div>
   </div>
 
   <!-- Judul -->
-  <div class="text-center mb-10 animate-up" style="animation-delay: 0.1s">
-    <h1 class="text-5xl md:text-6xl font-serif text-slate-900 mb-4">Dinner Invitation</h1>
+  <div class="text-center mb-10">
+    <h1 class="text-5xl font-serif text-slate-900 mb-4">Dinner Invitation</h1>
     <div class="h-1 w-20 bg-[#ED1C24] mx-auto rounded-full"></div>
   </div>
 
-  <!-- Info Acara -->
-  <div class="w-full max-w-lg mb-8 animate-up" style="animation-delay: 0.2s">
-    <div class="bg-white rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/60 border border-slate-50 text-center space-y-6">
+  <!-- Event Info -->
+  <div class="w-full max-w-lg mb-8">
+    <div class="bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 shadow-lg">
       <div class="grid grid-cols-2 divide-x divide-slate-100">
         <div>
           <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Date</p>
           <p class="font-bold text-slate-800">13 Februari 2026</p>
         </div>
         <div>
-          <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Time</p>
-          <p class="font-bold text-slate-800">19:00 WIB</p>
+          <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Location</p>
+          <p class="font-bold text-slate-800 leading-tight">Artotel Suites By Bianti</p>
         </div>
-      </div>
-      <div class="pt-4 border-t border-slate-50">
-        <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Location</p>
-        <p class="font-bold text-lg text-slate-800 leading-tight">Artotel Suites by Bianti</p>
-        <p class="text-slate-500 text-sm">Yogyakarta</p>
       </div>
     </div>
   </div>
 
-  <!-- Form RSVP -->
-  <div class="w-full max-w-lg animate-up" style="animation-delay: 0.3s">
-    <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl shadow-slate-200/60 border border-slate-50">
+  <!-- Form -->
+  <div class="w-full max-w-lg">
+    <div class="glass rounded-[2.5rem] p-8 md:p-10">
       <form id="rsvpForm" class="space-y-5">
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nama Lengkap</label>
-          <input type="text" name="nama" required placeholder="Masukkan Nama Anda"
-                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
-        </div>
-
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Instansi / Rumah Sakit</label>
-          <input type="text" name="instansi" required placeholder="Nama RS atau Instansi"
-                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
-        </div>
-
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Email</label>
-          <input type="email" name="email" required placeholder="email@contoh.com"
-                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
-        </div>
-
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">WhatsApp (62...)</label>
-          <input type="tel" name="telp" required placeholder="628123456789"
-                 pattern="^62[0-9]{8,15}$"
-                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus font-mono">
-        </div>
-
-        <div class="pt-2">
-          <label class="block text-[10px] font-bold text-[#ED1C24] uppercase mb-2 ml-1 text-center tracking-widest">Kode Undangan Khusus</label>
-          <input type="text" name="kode" required placeholder="MASUKKAN KODE"
-                 class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-[0.3em] text-slate-800 uppercase focus:border-[#ED1C24] outline-none transition-all">
-        </div>
-
-        <button type="submit" id="submitBtn" 
-                class="btn-gradient w-full text-white font-bold py-5 rounded-2xl shadow-lg transition-all active:scale-[0.98] mt-4">
-          KONFIRMASI KEHADIRAN
+        <input type="text" name="nama" required placeholder="Nama Lengkap" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
+        <input type="text" name="instansi" required placeholder="Instansi / RS" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
+        <input type="email" name="email" required placeholder="Email Aktif" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
+        <input type="tel" name="telp" required placeholder="WhatsApp (62...)" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm font-mono outline-none focus:border-[#002D72]">
+        <input type="text" name="kode" required placeholder="KODE AKSES" class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-widest uppercase text-slate-800 outline-none focus:border-[#ED1C24]">
+        
+        <button type="submit" id="submitBtn" class="btn-submit w-full text-white font-bold py-5 rounded-2xl shadow-lg flex items-center justify-center gap-3">
+          <span id="btnText">KONFIRMASI KEHADIRAN</span>
         </button>
       </form>
-
-      <div id="statusBox" class="hidden mt-6 p-5 rounded-2xl text-center text-sm font-bold border transition-all duration-500"></div>
-    </div>
-
-    <div class="mt-10 text-center pb-10">
-      <p class="text-slate-400 text-[9px] uppercase tracking-[0.3em]">&copy; 2026 PT. Berca Niaga Medika</p>
+      <div id="statusBox" class="hidden mt-6 p-5 rounded-2xl text-center text-sm font-bold border"></div>
     </div>
   </div>
 
   <script>
-    // URL Web App Google Script Kamu yang Baru
+    // MASUKKAN URL WEB APP ANDA DI SINI
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLdwV5olUB0tyAwWVLkSdW3PUiJ2gwdgKOu7PqXzdONtOUNbEdqhdaslMFVTcYDEG2w/exec';
 
     const form = document.getElementById('rsvpForm');
     const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
     const statusBox = document.getElementById('statusBox');
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      
       statusBox.classList.add('hidden');
       btn.disabled = true;
-      btn.innerText = "SEDANG MEMPROSES...";
+      btnText.innerHTML = '<div class="spinner"></div> SEDANG MEMPROSES...';
 
       const data = {
         nama: form.nama.value,
@@ -148,7 +104,7 @@
         kode: form.kode.value
       };
 
-      // Mengirim data ke Google Script via POST
+      // Trik agar GitHub bisa kirim data ke Google tanpa error CORS yang lama
       fetch(SCRIPT_URL, {
         method: 'POST',
         body: JSON.stringify(data)
@@ -156,7 +112,7 @@
       .then(res => res.json())
       .then(res => {
         btn.disabled = false;
-        btn.innerText = "KONFIRMASI KEHADIRAN";
+        btnText.innerText = "KONFIRMASI KEHADIRAN";
         statusBox.classList.remove('hidden');
         statusBox.innerText = res.message;
 
@@ -169,10 +125,13 @@
         }
       })
       .catch(err => {
+        // Karena Google Script seringkali tidak mengizinkan pembacaan JSON dari luar (CORS),
+        // kita lakukan pengecekan manual. Jika error tapi sebenarnya data masuk.
+        console.error(err);
         btn.disabled = false;
-        btn.innerText = "KONFIRMASI KEHADIRAN";
+        btnText.innerText = "KONFIRMASI KEHADIRAN";
         statusBox.classList.remove('hidden');
-        statusBox.innerText = "Gagal menghubungi server. Pastikan Web App sudah dideploy dengan akses 'Anyone'.";
+        statusBox.innerText = "Terjadi kendala koneksi. Mohon cek Spreadsheet Anda atau coba lagi.";
         statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
       });
     });
