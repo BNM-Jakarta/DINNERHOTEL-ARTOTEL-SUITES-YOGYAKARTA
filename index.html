@@ -19,7 +19,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center py-10 px-4">
 
-  <!-- Logo (Identik Gambar) -->
+  <!-- Logo -->
   <div class="bg-white p-6 rounded-2xl border border-slate-100 mb-12 flex items-center gap-6 max-w-full overflow-x-auto shadow-sm">
     <div class="flex flex-col items-center">
       <div class="w-24 h-1.5 bg-[#ED1C24] mb-1"></div>
@@ -79,8 +79,8 @@
   </div>
 
   <script>
-    // URL Web App Google Script Anda
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpbZksjwtHlSD2K4NpmEbDFdiPaBYF-5s6Y1YezZHEaCQYw3bTBdK9Nh9q7o2tKkg/exec';
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP HASIL DEPLOY TADI
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFWA3rT7cnGJHEuz8QcMbF0z_jQr6uFGXHWablfMt3pb7zyih2mR07Z_xbU6zF-7Mxiw/exec';
 
     const form = document.getElementById('rsvpForm');
     const btn = document.getElementById('submitBtn');
@@ -101,6 +101,8 @@
         kode: form.kode.value.trim().toUpperCase()
       };
 
+      // Gunakan POST dengan mode no-cors jika mengalami kendala CORS, 
+      // tapi secara default GAS Web App bisa menerima fetch JSON
       fetch(SCRIPT_URL, {
         method: 'POST',
         body: JSON.stringify(data)
@@ -121,10 +123,11 @@
         }
       })
       .catch(err => {
+        console.error(err);
         btn.disabled = false;
         btnText.innerText = "KONFIRMASI KEHADIRAN";
         statusBox.classList.remove('hidden');
-        statusBox.innerText = "Gagal terhubung ke server. Silakan coba lagi.";
+        statusBox.innerText = "Gagal terhubung ke server. Pastikan URL Script benar.";
         statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
       });
     });
