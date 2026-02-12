@@ -35,7 +35,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center py-10 px-4">
 
-  <!-- Logo Container (Persis seperti Gambar) -->
+  <!-- Logo BNM (Identik Gambar) -->
   <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-12 animate-up flex items-center gap-6 max-w-full overflow-x-auto">
     <div class="flex flex-col items-center">
       <div class="w-24 h-1.5 bg-[#ED1C24] mb-1"></div>
@@ -44,18 +44,18 @@
     </div>
     <div class="h-12 w-px bg-slate-200"></div>
     <div class="flex flex-col">
-      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap">PT. BERCA NIAGA</span>
-      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap">MEDIKA</span>
+      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap uppercase">PT. Berca Niaga</span>
+      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap uppercase">Medika</span>
     </div>
   </div>
 
-  <!-- Hero Text -->
+  <!-- Judul -->
   <div class="text-center mb-10 animate-up" style="animation-delay: 0.1s">
     <h1 class="text-5xl md:text-6xl font-serif text-slate-900 mb-4">Dinner Invitation</h1>
     <div class="h-1 w-20 bg-[#ED1C24] mx-auto rounded-full"></div>
   </div>
 
-  <!-- Event Details Card -->
+  <!-- Info Acara -->
   <div class="w-full max-w-lg mb-8 animate-up" style="animation-delay: 0.2s">
     <div class="bg-white rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/60 border border-slate-50 text-center space-y-6">
       <div class="grid grid-cols-2 divide-x divide-slate-100">
@@ -70,7 +70,7 @@
       </div>
       <div class="pt-4 border-t border-slate-50">
         <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Location</p>
-        <p class="font-bold text-lg text-slate-800">Artotel Suites by Bianti</p>
+        <p class="font-bold text-lg text-slate-800 leading-tight">Artotel Suites by Bianti</p>
         <p class="text-slate-500 text-sm">Yogyakarta</p>
       </div>
     </div>
@@ -79,8 +79,6 @@
   <!-- Form RSVP -->
   <div class="w-full max-w-lg animate-up" style="animation-delay: 0.3s">
     <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl shadow-slate-200/60 border border-slate-50">
-      <h3 class="text-center font-bold text-slate-700 uppercase tracking-widest text-xs mb-8">Konfirmasi Reservasi</h3>
-      
       <form id="rsvpForm" class="space-y-5">
         <div>
           <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nama Lengkap</label>
@@ -95,13 +93,13 @@
         </div>
 
         <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Alamat Email</label>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Email</label>
           <input type="email" name="email" required placeholder="email@contoh.com"
                  class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
         </div>
 
         <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nomor WhatsApp (62...)</label>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">WhatsApp (62...)</label>
           <input type="tel" name="telp" required placeholder="628123456789"
                  pattern="^62[0-9]{8,15}$"
                  class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus font-mono">
@@ -114,7 +112,7 @@
         </div>
 
         <button type="submit" id="submitBtn" 
-                class="btn-gradient w-full text-white font-bold py-5 rounded-2xl shadow-lg shadow-blue-900/20 transition-all active:scale-[0.98] mt-4">
+                class="btn-gradient w-full text-white font-bold py-5 rounded-2xl shadow-lg transition-all active:scale-[0.98] mt-4">
           KONFIRMASI KEHADIRAN
         </button>
       </form>
@@ -128,6 +126,9 @@
   </div>
 
   <script>
+    // URL Web App Google Script Kamu yang Baru
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLdwV5olUB0tyAwWVLkSdW3PUiJ2gwdgKOu7PqXzdONtOUNbEdqhdaslMFVTcYDEG2w/exec';
+
     const form = document.getElementById('rsvpForm');
     const btn = document.getElementById('submitBtn');
     const statusBox = document.getElementById('statusBox');
@@ -147,29 +148,33 @@
         kode: form.kode.value
       };
 
-      google.script.run
-        .withSuccessHandler(function(res) {
-          btn.disabled = false;
-          btn.innerText = "KONFIRMASI KEHADIRAN";
-          statusBox.classList.remove('hidden');
-          statusBox.innerText = res.message;
+      // Mengirim data ke Google Script via POST
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(res => {
+        btn.disabled = false;
+        btn.innerText = "KONFIRMASI KEHADIRAN";
+        statusBox.classList.remove('hidden');
+        statusBox.innerText = res.message;
 
-          if (res.success) {
-            statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-emerald-50 text-emerald-600 border-emerald-100";
-            form.reset();
-            form.style.display = 'none';
-          } else {
-            statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
-          }
-        })
-        .withFailureHandler(function() {
-          btn.disabled = false;
-          btn.innerText = "KONFIRMASI KEHADIRAN";
-          statusBox.classList.remove('hidden');
-          statusBox.innerText = "Gangguan koneksi. Silakan coba lagi.";
+        if (res.success) {
+          statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-emerald-50 text-emerald-600 border-emerald-100";
+          form.reset();
+          form.style.display = 'none';
+        } else {
           statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
-        })
-        .processForm(data);
+        }
+      })
+      .catch(err => {
+        btn.disabled = false;
+        btn.innerText = "KONFIRMASI KEHADIRAN";
+        statusBox.classList.remove('hidden');
+        statusBox.innerText = "Gagal menghubungi server. Pastikan Web App sudah dideploy dengan akses 'Anyone'.";
+        statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
+      });
     });
   </script>
 </body>
