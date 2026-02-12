@@ -7,49 +7,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bnm-navy: #002D72;
-      --bnm-red: #ED1C24;
-    }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8fafc;
-      color: var(--bnm-navy);
-    }
+    :root { --bnm-navy: #002D72; --bnm-red: #ED1C24; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: var(--bnm-navy); }
     .font-serif { font-family: 'Playfair Display', serif; }
-    .btn-submit {
-      background: linear-gradient(135deg, var(--bnm-navy) 0%, #001a45 100%);
-      transition: all 0.3s;
-    }
-    .btn-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    .glass {
-      background: white;
-      border: 1px solid rgba(0, 45, 114, 0.1);
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-    }
-    
-    .spinner {
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top: 3px solid #fff;
-      width: 20px;
-      height: 20px;
-      animation: spin 1s linear infinite;
-      display: inline-block;
-    }
-    @keyframes spin { 
-      0% { transform: rotate(0deg); } 
-      100% { transform: rotate(360deg); } 
-    }
+    .btn-submit { background: linear-gradient(135deg, var(--bnm-navy) 0%, #001a45 100%); transition: all 0.3s; }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+    .glass { background: white; border: 1px solid rgba(0, 45, 114, 0.1); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    .spinner { border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 3px solid #fff; width: 18px; height: 18px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center py-10 px-4">
 
-  <!-- Logo BNM (Identik Gambar) -->
-  <div class="bg-white p-6 rounded-2xl border border-slate-100 mb-12 flex items-center gap-6 max-w-full overflow-x-auto shadow-sm animate-fade-in">
+  <!-- Logo (Identik Gambar) -->
+  <div class="bg-white p-6 rounded-2xl border border-slate-100 mb-12 flex items-center gap-6 max-w-full overflow-x-auto shadow-sm">
     <div class="flex flex-col items-center">
       <div class="w-24 h-1.5 bg-[#ED1C24] mb-1"></div>
       <span class="text-4xl font-[900] tracking-tighter text-[#002D72] leading-none">BNM</span>
@@ -61,7 +32,6 @@
     </div>
   </div>
 
-  <!-- Judul Acara -->
   <div class="text-center mb-10">
     <h1 class="text-5xl font-serif text-slate-900 mb-4">Dinner Invitation</h1>
     <div class="h-1 w-20 bg-[#ED1C24] mx-auto rounded-full"></div>
@@ -86,34 +56,15 @@
     </div>
   </div>
 
-  <!-- Form Konfirmasi -->
+  <!-- Form -->
   <div class="w-full max-w-lg">
     <div class="glass rounded-[2.5rem] p-8 md:p-10">
       <form id="rsvpForm" class="space-y-5">
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nama Lengkap</label>
-          <input type="text" name="nama" required placeholder="Nama Lengkap" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
-        </div>
-        
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Instansi / Rumah Sakit</label>
-          <input type="text" name="instansi" required placeholder="Instansi / RS" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
-        </div>
-
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Email Aktif</label>
-          <input type="email" name="email" required placeholder="email@contoh.com" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
-        </div>
-
-        <div>
-          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nomor WhatsApp</label>
-          <input type="tel" name="telp" required placeholder="628123456789" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm font-mono outline-none focus:border-[#002D72]">
-        </div>
-
-        <div class="pt-2">
-          <label class="block text-[10px] font-bold text-[#ED1C24] uppercase mb-2 text-center tracking-widest">Kode Undangan Khusus</label>
-          <input type="text" name="kode" required placeholder="KODE AKSES" class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-widest uppercase text-slate-800 outline-none focus:border-[#ED1C24]">
-        </div>
+        <input type="text" name="nama" required placeholder="Nama Lengkap" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
+        <input type="text" name="instansi" required placeholder="Instansi / RS" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
+        <input type="email" name="email" required placeholder="Email Aktif" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
+        <input type="tel" name="telp" required placeholder="WhatsApp (62...)" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm font-mono outline-none focus:border-[#002D72]">
+        <input type="text" name="kode" required placeholder="KODE AKSES" class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-widest uppercase text-slate-800 outline-none focus:border-[#ED1C24]">
         
         <button type="submit" id="submitBtn" class="btn-submit w-full text-white font-bold py-5 rounded-2xl shadow-lg flex items-center justify-center gap-3">
           <span id="btnText">KONFIRMASI KEHADIRAN</span>
@@ -140,7 +91,7 @@
       e.preventDefault();
       statusBox.classList.add('hidden');
       btn.disabled = true;
-      btnText.innerHTML = '<div class="spinner"></div> SEDANG MEMPROSES...';
+      btnText.innerHTML = '<span class="spinner"></span> MEMPROSES...';
 
       const data = {
         nama: form.nama.value,
@@ -170,11 +121,10 @@
         }
       })
       .catch(err => {
-        console.error(err);
         btn.disabled = false;
         btnText.innerText = "KONFIRMASI KEHADIRAN";
         statusBox.classList.remove('hidden');
-        statusBox.innerText = "Terjadi kendala koneksi. Data mungkin sudah masuk, silakan cek Spreadsheet atau coba lagi.";
+        statusBox.innerText = "Gagal terhubung ke server. Silakan coba lagi.";
         statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
       });
     });
