@@ -77,12 +77,12 @@
           <span id="btnText">KONFIRMASI KEHADIRAN</span>
         </button>
       </form>
-      <div id="statusBox" class="hidden mt-6 p-5 rounded-2xl text-center text-sm font-bold border"></div>
+      <div id="statusBox" class="hidden mt-6 p-5 rounded-2xl text-center text-sm font-bold border transition-all duration-300"></div>
     </div>
   </div>
 
   <script>
-    // MASUKKAN URL WEB APP ANDA DI SINI
+    // URL Web App Google Script
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLdwV5olUB0tyAwWVLkSdW3PUiJ2gwdgKOu7PqXzdONtOUNbEdqhdaslMFVTcYDEG2w/exec';
 
     const form = document.getElementById('rsvpForm');
@@ -104,7 +104,6 @@
         kode: form.kode.value
       };
 
-      // Trik agar GitHub bisa kirim data ke Google tanpa error CORS yang lama
       fetch(SCRIPT_URL, {
         method: 'POST',
         body: JSON.stringify(data)
@@ -125,13 +124,11 @@
         }
       })
       .catch(err => {
-        // Karena Google Script seringkali tidak mengizinkan pembacaan JSON dari luar (CORS),
-        // kita lakukan pengecekan manual. Jika error tapi sebenarnya data masuk.
         console.error(err);
         btn.disabled = false;
         btnText.innerText = "KONFIRMASI KEHADIRAN";
         statusBox.classList.remove('hidden');
-        statusBox.innerText = "Terjadi kendala koneksi. Mohon cek Spreadsheet Anda atau coba lagi.";
+        statusBox.innerText = "Gagal terhubung. Pastikan nama tab di Sheet adalah 'Database' & 'MasterKode', lalu Deploy ulang Web App Anda.";
         statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
       });
     });
