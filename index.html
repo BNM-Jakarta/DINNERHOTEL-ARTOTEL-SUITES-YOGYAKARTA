@@ -5,132 +5,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dinner Invitation - BNM</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bnm-navy: #002D72;
+      --bnm-red: #ED1C24;
+    }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #020617;
-      color: white;
+      background-color: #f8fafc;
+      color: var(--bnm-navy);
     }
     .font-serif { font-family: 'Playfair Display', serif; }
-    .glass {
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .btn-gradient {
+      background: linear-gradient(135deg, var(--bnm-navy) 0%, #001a45 100%);
     }
-    .input-field {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
-      transition: all 0.3s ease;
-    }
-    .input-field:focus {
-      border-color: #0ea5e9;
-      background: rgba(255, 255, 255, 0.08);
-      outline: none;
-      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+    .input-focus:focus {
+      border-color: var(--bnm-navy);
+      box-shadow: 0 0 0 3px rgba(0, 45, 114, 0.1);
     }
     .animate-up {
-      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-12 px-6">
+<body class="min-h-screen flex flex-col items-center py-10 px-4">
 
-  <!-- Logo BNM Section (Updated to match image) -->
-  <div class="mb-12 animate-up bg-white py-4 px-8 rounded-2xl flex items-center justify-center shadow-lg">
-    <svg width="280" height="70" viewBox="0 0 350 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Left Side: BNM with red bars -->
-      <rect x="10" y="5" width="120" height="6" fill="#ED1C24" /> <!-- Top Red Bar -->
-      <text x="70" y="58" text-anchor="middle" fill="#002D72" font-family="Arial, sans-serif" font-weight="900" font-size="52">BNM</text>
-      <rect x="10" y="65" width="120" height="6" fill="#ED1C24" /> <!-- Bottom Red Bar -->
-      
-      <!-- Right Side: Company Name -->
-      <text x="145" y="32" fill="#002D72" font-family="Arial, sans-serif" font-weight="800" font-size="22">PT. BERCA NIAGA</text>
-      <text x="145" y="62" fill="#002D72" font-family="Arial, sans-serif" font-weight="800" font-size="22">MEDIKA</text>
-    </svg>
+  <!-- Logo Container (Persis seperti Gambar) -->
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-12 animate-up flex items-center gap-6 max-w-full overflow-x-auto">
+    <div class="flex flex-col items-center">
+      <div class="w-24 h-1.5 bg-[#ED1C24] mb-1"></div>
+      <span class="text-4xl font-[900] tracking-tighter text-[#002D72] leading-none">BNM</span>
+      <div class="w-24 h-1.5 bg-[#ED1C24] mt-1"></div>
+    </div>
+    <div class="h-12 w-px bg-slate-200"></div>
+    <div class="flex flex-col">
+      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap">PT. BERCA NIAGA</span>
+      <span class="text-lg font-[800] text-[#002D72] leading-tight whitespace-nowrap">MEDIKA</span>
+    </div>
   </div>
 
-  <!-- Hero Content -->
-  <div class="text-center max-w-2xl mb-12 animate-up" style="animation-delay: 0.1s">
-    <p class="text-sky-500 tracking-[0.4em] text-[10px] font-bold uppercase mb-4">Official Invitation</p>
-    <h1 class="text-5xl md:text-6xl font-serif mb-6 leading-tight">Dinner Invitation</h1>
-    <div class="h-1 w-24 bg-sky-500 mx-auto rounded-full"></div>
+  <!-- Hero Text -->
+  <div class="text-center mb-10 animate-up" style="animation-delay: 0.1s">
+    <h1 class="text-5xl md:text-6xl font-serif text-slate-900 mb-4">Dinner Invitation</h1>
+    <div class="h-1 w-20 bg-[#ED1C24] mx-auto rounded-full"></div>
   </div>
 
-  <!-- Event Detail Card -->
-  <div class="w-full max-w-xl mb-12 animate-up" style="animation-delay: 0.2s">
-    <div class="glass rounded-[3rem] p-10 text-center relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 blur-[60px]"></div>
-      
-      <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+  <!-- Event Details Card -->
+  <div class="w-full max-w-lg mb-8 animate-up" style="animation-delay: 0.2s">
+    <div class="bg-white rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/60 border border-slate-50 text-center space-y-6">
+      <div class="grid grid-cols-2 divide-x divide-slate-100">
         <div>
-          <p class="text-slate-400 text-xs uppercase tracking-widest mb-2">Date</p>
-          <p class="text-xl font-semibold">13 Februari 2026</p>
+          <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Date</p>
+          <p class="font-bold text-slate-800">13 Februari 2026</p>
         </div>
-        <div class="hidden md:block w-px h-12 bg-white/10"></div>
         <div>
-          <p class="text-slate-400 text-xs uppercase tracking-widest mb-2">Location</p>
-          <p class="text-xl font-semibold leading-tight">Artotel Suites by <br>Bianti Yogyakarta</p>
+          <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Time</p>
+          <p class="font-bold text-slate-800">19:00 WIB</p>
         </div>
+      </div>
+      <div class="pt-4 border-t border-slate-50">
+        <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Location</p>
+        <p class="font-bold text-lg text-slate-800">Artotel Suites by Bianti</p>
+        <p class="text-slate-500 text-sm">Yogyakarta</p>
       </div>
     </div>
   </div>
 
-  <!-- Form Section -->
-  <div class="w-full max-w-xl animate-up" style="animation-delay: 0.3s">
-    <div class="glass rounded-[3rem] p-10 shadow-2xl shadow-sky-900/10">
-      <h3 class="text-lg font-semibold mb-8 text-center text-slate-200">Konfirmasi Kehadiran</h3>
+  <!-- Form RSVP -->
+  <div class="w-full max-w-lg animate-up" style="animation-delay: 0.3s">
+    <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl shadow-slate-200/60 border border-slate-50">
+      <h3 class="text-center font-bold text-slate-700 uppercase tracking-widest text-xs mb-8">Konfirmasi Reservasi</h3>
       
-      <form id="rsvpForm" class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
-            <input type="text" name="nama" required placeholder="Nama Lengkap"
-                   class="input-field w-full px-5 py-4 rounded-2xl text-sm">
-          </div>
-          <div>
-            <label class="block text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2 ml-1">Instansi / Rumah Sakit</label>
-            <input type="text" name="instansi" required placeholder="Nama RS/Kantor"
-                   class="input-field w-full px-5 py-4 rounded-2xl text-sm">
-          </div>
+      <form id="rsvpForm" class="space-y-5">
+        <div>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nama Lengkap</label>
+          <input type="text" name="nama" required placeholder="Masukkan Nama Anda"
+                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
         </div>
 
         <div>
-          <label class="block text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2 ml-1">Alamat Email</label>
-          <input type="email" name="email" required placeholder="contoh@email.com"
-                 class="input-field w-full px-5 py-4 rounded-2xl text-sm">
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Instansi / Rumah Sakit</label>
+          <input type="text" name="instansi" required placeholder="Nama RS atau Instansi"
+                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
         </div>
 
         <div>
-          <label class="block text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2 ml-1">WhatsApp (Awalan 62)</label>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Alamat Email</label>
+          <input type="email" name="email" required placeholder="email@contoh.com"
+                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus">
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-2 ml-1">Nomor WhatsApp (62...)</label>
           <input type="tel" name="telp" required placeholder="628123456789"
                  pattern="^62[0-9]{8,15}$"
-                 class="input-field w-full px-5 py-4 rounded-2xl text-sm font-mono tracking-wider">
+                 class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 text-sm outline-none transition-all input-focus font-mono">
         </div>
 
-        <div>
-          <label class="block text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2 ml-1 text-center">Kode Undangan Khusus</label>
-          <input type="text" name="kode" required placeholder="BNMJ-XXXX"
-                 class="input-field w-full px-5 py-4 rounded-2xl text-sm font-mono tracking-[0.3em] uppercase text-center border-sky-500/30">
+        <div class="pt-2">
+          <label class="block text-[10px] font-bold text-[#ED1C24] uppercase mb-2 ml-1 text-center tracking-widest">Kode Undangan Khusus</label>
+          <input type="text" name="kode" required placeholder="MASUKKAN KODE"
+                 class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-[0.3em] text-slate-800 uppercase focus:border-[#ED1C24] outline-none transition-all">
         </div>
 
         <button type="submit" id="submitBtn" 
-                class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-5 rounded-2xl shadow-xl shadow-sky-900/30 transition-all duration-300 transform active:scale-[0.98]">
-          Konfirmasi Kehadiran
+                class="btn-gradient w-full text-white font-bold py-5 rounded-2xl shadow-lg shadow-blue-900/20 transition-all active:scale-[0.98] mt-4">
+          KONFIRMASI KEHADIRAN
         </button>
       </form>
 
-      <div id="statusBox" class="hidden mt-8 p-5 rounded-2xl text-center text-sm font-medium border animate-up"></div>
+      <div id="statusBox" class="hidden mt-6 p-5 rounded-2xl text-center text-sm font-bold border transition-all duration-500"></div>
     </div>
 
-    <div class="mt-12 text-center">
-      <p class="text-slate-600 text-[10px] uppercase tracking-[0.4em]">Professional Healthcare Solutions</p>
-      <p class="text-slate-700 text-[9px] mt-2 italic">Official RSVP System &bull; Berca Niaga Medika</p>
+    <div class="mt-10 text-center pb-10">
+      <p class="text-slate-400 text-[9px] uppercase tracking-[0.3em]">&copy; 2026 PT. Berca Niaga Medika</p>
     </div>
   </div>
 
@@ -144,7 +137,7 @@
       
       statusBox.classList.add('hidden');
       btn.disabled = true;
-      btn.innerHTML = '<span class="inline-block animate-pulse text-xs">Memproses data...</span>';
+      btn.innerText = "SEDANG MEMPROSES...";
 
       const data = {
         nama: form.nama.value,
@@ -157,24 +150,24 @@
       google.script.run
         .withSuccessHandler(function(res) {
           btn.disabled = false;
-          btn.innerText = "Konfirmasi Kehadiran";
+          btn.innerText = "KONFIRMASI KEHADIRAN";
           statusBox.classList.remove('hidden');
           statusBox.innerText = res.message;
 
           if (res.success) {
-            statusBox.className = "mt-8 p-5 rounded-2xl text-center text-sm font-medium bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+            statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-emerald-50 text-emerald-600 border-emerald-100";
             form.reset();
             form.style.display = 'none';
           } else {
-            statusBox.className = "mt-8 p-5 rounded-2xl text-center text-sm font-medium bg-rose-500/10 text-rose-400 border-rose-500/20";
+            statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
           }
         })
         .withFailureHandler(function() {
           btn.disabled = false;
-          btn.innerText = "Konfirmasi Kehadiran";
+          btn.innerText = "KONFIRMASI KEHADIRAN";
           statusBox.classList.remove('hidden');
-          statusBox.innerText = "Terjadi gangguan koneksi. Mohon coba beberapa saat lagi.";
-          statusBox.className = "mt-8 p-5 rounded-2xl text-center text-sm font-medium bg-rose-500/10 text-rose-400 border-rose-500/20";
+          statusBox.innerText = "Gangguan koneksi. Silakan coba lagi.";
+          statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
         })
         .processForm(data);
     });
