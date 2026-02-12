@@ -19,7 +19,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center py-10 px-4">
 
-  <!-- Logo -->
+  <!-- Logo (Identitas Visual) -->
   <div class="bg-white p-6 rounded-2xl border border-slate-100 mb-12 flex items-center gap-6 max-w-full overflow-x-auto shadow-sm">
     <div class="flex flex-col items-center">
       <div class="w-24 h-1.5 bg-[#ED1C24] mb-1"></div>
@@ -56,7 +56,7 @@
     </div>
   </div>
 
-  <!-- Form -->
+  <!-- Form RSVP -->
   <div class="w-full max-w-lg">
     <div class="glass rounded-[2.5rem] p-8 md:p-10">
       <form id="rsvpForm" class="space-y-5">
@@ -64,7 +64,14 @@
         <input type="text" name="instansi" required placeholder="Instansi / RS" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
         <input type="email" name="email" required placeholder="Email Aktif" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm outline-none focus:border-[#002D72]">
         <input type="tel" name="telp" required placeholder="WhatsApp (62...)" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm font-mono outline-none focus:border-[#002D72]">
-        <input type="text" name="kode" required placeholder="KODE AKSES" class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-widest uppercase text-slate-800 outline-none focus:border-[#ED1C24]">
+        
+        <div>
+          <input type="text" name="kode" required placeholder="KODE AKSES" class="w-full px-5 py-4 rounded-2xl bg-white border-2 border-slate-100 text-center font-bold tracking-widest uppercase text-slate-800 outline-none focus:border-[#ED1C24]">
+          <p class="text-[11px] text-slate-400 mt-3 text-center leading-relaxed">
+            Jika master kode tidak bisa, mohon menghubungi <br> 
+            <span class="font-bold text-slate-600">Ibu Nirma : 081286021179</span>
+          </p>
+        </div>
         
         <button type="submit" id="submitBtn" class="btn-submit w-full text-white font-bold py-5 rounded-2xl shadow-lg flex items-center justify-center gap-3">
           <span id="btnText">KONFIRMASI KEHADIRAN</span>
@@ -79,8 +86,8 @@
   </div>
 
   <script>
-    // GANTI URL DI BAWAH INI DENGAN URL WEB APP HASIL DEPLOY TADI
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFWA3rT7cnGJHEuz8QcMbF0z_jQr6uFGXHWablfMt3pb7zyih2mR07Z_xbU6zF-7Mxiw/exec';
+    // URL Web App Google Script yang Anda berikan
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxw0obYdGO4JBZQDDrRVgN53NShmkifSbAs4Hl4ghhJJm9MFK33zXBLkzfl4SI6WqMP/exec';
 
     const form = document.getElementById('rsvpForm');
     const btn = document.getElementById('submitBtn');
@@ -101,8 +108,6 @@
         kode: form.kode.value.trim().toUpperCase()
       };
 
-      // Gunakan POST dengan mode no-cors jika mengalami kendala CORS, 
-      // tapi secara default GAS Web App bisa menerima fetch JSON
       fetch(SCRIPT_URL, {
         method: 'POST',
         body: JSON.stringify(data)
@@ -117,17 +122,18 @@
         if (res.success) {
           statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-emerald-50 text-emerald-600 border-emerald-100";
           form.reset();
+          // Opsional: Sembunyikan form setelah sukses
           form.style.display = 'none';
         } else {
           statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
         }
       })
       .catch(err => {
-        console.error(err);
+        console.error('Error:', err);
         btn.disabled = false;
         btnText.innerText = "KONFIRMASI KEHADIRAN";
         statusBox.classList.remove('hidden');
-        statusBox.innerText = "Gagal terhubung ke server. Pastikan URL Script benar.";
+        statusBox.innerText = "Gagal terhubung ke server. Silakan coba beberapa saat lagi.";
         statusBox.className = "mt-6 p-5 rounded-2xl text-center text-sm font-bold bg-rose-50 text-rose-600 border-rose-100";
       });
     });
